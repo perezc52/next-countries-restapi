@@ -2,7 +2,6 @@ import SearchBar from "@/components/SearchBar";
 import CountrySelect from "@/components/CountrySelect";
 import CountryCard from "@/components/CountryCard";
 import { Country } from "@/lib/types";
-import Link from "next/link";
 
 export default async function Home() {
   const response = await fetch("https://restcountries.com/v3.1/all");
