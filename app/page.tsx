@@ -1,9 +1,12 @@
+
+
 import SearchBar from "@/components/SearchBar";
 import CountrySelect from "@/components/CountrySelect";
 import CountryCard from "@/components/CountryCard";
 import { Country } from "@/lib/types";
 
 export default async function Home() {
+
   const response = await fetch("https://restcountries.com/v3.1/all");
   const countries = await response.json();
   return (

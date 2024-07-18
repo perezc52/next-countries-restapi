@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -5,10 +7,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 export default function CountrySelect() {
+  const [selectedCountry, setSelectedCountry] = useState("");
+  console.log(selectedCountry);
+
   return (
-    <Select>
+    <Select onValueChange={setSelectedCountry}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Filter by Region" />
       </SelectTrigger>

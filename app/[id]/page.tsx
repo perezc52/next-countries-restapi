@@ -19,8 +19,9 @@ export default async function CountryPage({
   console.log(country.currencies);
   const officialName = getOfficialName(country.name);
   const population = formatPopulation(country.population);
-  const currency = getCurrencyName(country.currencies)
-  console.log(currency)
+  const currency = getCurrencyName(country.currencies);
+  const languages = Object.values(country.languages).join(", ");
+  console.log(languages);
 
   if (!country) {
     return (
@@ -78,6 +79,10 @@ export default async function CountryPage({
               <li>
                 <span>Currency: </span>
                 {currency}
+              </li>
+              <li>
+                <span>Languages: </span>
+                {languages}
               </li>
             </ul>
           </div>
