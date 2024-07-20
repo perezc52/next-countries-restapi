@@ -33,19 +33,18 @@ export default async function CountryPage({
   }
 
   return (
-    <main>
+    <main className="px-16">
       <BackButton />
-      <div className="flex">
-        <div>
+      <div className="flex justify-between gap-14">
+        <div className="relative w-full h-[400px]">
           <Image
-            className=""
+            className="object-cover"
             src={country.flags?.png || country.flags?.svg}
-            width={100}
-            height={100}
+            layout="fill"
             alt={country.flags?.alt}
           />
         </div>
-        <div>
+        <div className="w-full p-14">
           <h1 className="text-3xl font-bold">{country.name?.common}</h1>
           <div>
             <ul>

@@ -13,13 +13,14 @@ export default function CountryCard({ country }: CountryProps) {
     <Card className="w-[300px] h-[400px]">
       <CardHeader className="p-0">
         <Link href={`/${slugify(country.name.common)}`}>
-          <Image
-            className="w-full h-full"
-            src={country.flags.png}
-            width={100}
-            height={100}
-            alt={`Flag of ${country.name.common}`}
-          />
+          <div className="relative w-full h-48">
+            <Image
+              className="object-cover"
+              layout="fill"
+              src={country.flags.png}
+              alt={`Flag of ${country.name.common}`}
+            />
+          </div>
         </Link>
       </CardHeader>
       <CardContent className="p-5">

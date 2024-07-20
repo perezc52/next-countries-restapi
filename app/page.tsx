@@ -24,10 +24,12 @@ export default function Home() {
   }, [selectedRegion]);
 
   return (
-    <div>
+    <div className="px-16">
+      <div className="flex justify-between my-10">
       <SearchBar setCountries={setCountries}/>
       <CountrySelect onSelectRegion={setSelectedRegion} />
-      <ul className="grid md:grid-cols-4 gap-4">
+      </div>
+      <ul className="grid md:grid-cols-2 lg:grid-cols-4">
         {countries.map((country: Country) => (
           <li>
             <CountryCard country={country} />

@@ -1,12 +1,12 @@
-import { Moon } from "lucide-react";
+import ModeToggle from "./LightDarkToggle";
 
 export default function Header() {
   return (
-    <header className="flex justify-between p-5 mx-5">
-      <h1>Where in the world?</h1>
-      <div className="flex gap-2">
-        <Moon/>
-        <span>Dark Mode</span>
+    <header className="flex justify-between items-center p-5 px-16 border-b">
+      <h1 className="font-bold">Where in the world?</h1>
+      <div className="flex gap-2 items-center">
+        <ModeToggle/>
+        <span>Toggle theme</span>
       </div>
     </header>
   );
