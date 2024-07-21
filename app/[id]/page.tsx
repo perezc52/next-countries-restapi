@@ -4,6 +4,8 @@ import Image from "next/image";
 import getOfficialName from "@/lib/getOfficialCountryName";
 import formatPopulation from "@/lib/formatPopulation";
 import getCurrencyName from "@/lib/getCurrencyName";
+import BorderCountry from "@/components/BorderCountry";
+import { Country } from "@/lib/types";
 
 export default async function CountryPage({
   params,
@@ -16,12 +18,24 @@ export default async function CountryPage({
   let country = await response.json();
   country = country[0];
 
-  console.log(country.currencies);
+  let borderCountryNames: string[];
+  if(country.borders) {
+    const urlCodes = country?.borders.map((el: string) => `${el},`).join("");
+    const response2 = await fetch(
+      `https://restcountries.com/v3.1/alpha?codes=${urlCodes}`
+    );
+    const borderCountries = await response2.json();
+    borderCountryNames = borderCountries.map(
+      (el: Country) => el.name.common
+    );
+  }else {
+    borderCountryNames = ['No border countries']
+  }
+
   const officialName = getOfficialName(country.name);
   const population = formatPopulation(country.population);
   const currency = getCurrencyName(country.currencies);
   const languages = Object.values(country.languages).join(", ");
-  console.log(languages);
 
   if (!country) {
     return (
@@ -84,6 +98,12 @@ export default async function CountryPage({
                 {languages}
               </li>
             </ul>
+            <div className="flex items-center flex-wrap gap-2">
+              <span>Border countries: </span>
+              {borderCountryNames.map((el: string) => (
+                <BorderCountry name={el} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

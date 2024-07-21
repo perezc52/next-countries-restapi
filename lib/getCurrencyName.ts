@@ -10,7 +10,6 @@ interface Country {
 }
 
 export default function getCurrencyName(country: Country): string {
-  console.log(country);
   const firstCurrencyKey = Object.keys(country)[0];
   return country[firstCurrencyKey]?.name || "";
 }
