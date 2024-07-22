@@ -3,9 +3,13 @@ import deslugify from "@/lib/deslugify";
 import Image from "next/image";
 import getOfficialName from "@/lib/getOfficialCountryName";
 import formatPopulation from "@/lib/formatPopulation";
-import getCurrencyName from "@/lib/getCurrencyName";
 import BorderCountry from "@/components/BorderCountry";
 import { Country } from "@/lib/types";
+
+interface Currency {
+  name: string;
+  symbol: string;
+}
 
 export default async function CountryPage({
   params,
@@ -30,9 +34,13 @@ export default async function CountryPage({
     borderCountryNames = ["No border countries"];
   }
 
+  console.log(country);
   const officialName = getOfficialName(country.name);
   const population = formatPopulation(country.population);
-  const currency = getCurrencyName(country.currencies);
+  const currency = country.currencies
+    ? (Object.values(country.currencies)[0] as Currency).name
+    : "Unknown";
+  console.log(country.currencies);
   const languages = Object.values(country.languages).join(", ");
 
   if (!country) {
@@ -97,7 +105,9 @@ export default async function CountryPage({
               </li>
             </ul>
           </div>
-          <span className="font-bold inline-block mb-2">Border countries: </span>
+          <span className="font-bold inline-block mb-2">
+            Border countries:{" "}
+          </span>
           <div className="flex items-center flex-wrap gap-2">
             {borderCountryNames.map((el: string) => (
               <BorderCountry name={el} />
