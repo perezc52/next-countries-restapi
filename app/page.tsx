@@ -5,6 +5,7 @@ import CountrySelect from "@/components/CountrySelect";
 import CountryCard from "@/components/CountryCard";
 import { Country } from "@/lib/types";
 import { useEffect, useState } from "react";
+import { Suspense } from "react";
 
 export default function Home() {
   const [countries, setCountries] = useState<Country[]>([]);
@@ -26,8 +27,10 @@ export default function Home() {
   return (
     <div className="px-16">
       <div className="flex justify-between my-10">
-      <SearchBar setCountries={setCountries}/>
-      <CountrySelect onSelectRegion={setSelectedRegion} />
+        <Suspense>
+          <SearchBar setCountries={setCountries} />
+        </Suspense>
+        <CountrySelect onSelectRegion={setSelectedRegion} />
       </div>
       <ul className="grid mx-auto gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {countries.map((country: Country) => (
