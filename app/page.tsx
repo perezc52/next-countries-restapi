@@ -29,9 +29,9 @@ export default function Home() {
       <SearchBar setCountries={setCountries}/>
       <CountrySelect onSelectRegion={setSelectedRegion} />
       </div>
-      <ul className="grid md:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid mx-auto gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {countries.map((country: Country) => (
-          <li>
+          <li className="w-full">
             <CountryCard country={country} />
           </li>
         ))}

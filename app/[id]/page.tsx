@@ -19,17 +19,15 @@ export default async function CountryPage({
   country = country[0];
 
   let borderCountryNames: string[];
-  if(country.borders) {
+  if (country.borders) {
     const urlCodes = country?.borders.map((el: string) => `${el},`).join("");
     const response2 = await fetch(
       `https://restcountries.com/v3.1/alpha?codes=${urlCodes}`
     );
     const borderCountries = await response2.json();
-    borderCountryNames = borderCountries.map(
-      (el: Country) => el.name.common
-    );
-  }else {
-    borderCountryNames = ['No border countries']
+    borderCountryNames = borderCountries.map((el: Country) => el.name.common);
+  } else {
+    borderCountryNames = ["No border countries"];
   }
 
   const officialName = getOfficialName(country.name);
@@ -49,7 +47,7 @@ export default async function CountryPage({
   return (
     <main className="px-16">
       <BackButton />
-      <div className="flex justify-between gap-14">
+      <div className="md:flex md:justify-between md:gap-14">
         <div className="relative w-full h-[400px]">
           <Image
             className="object-cover"
@@ -58,52 +56,52 @@ export default async function CountryPage({
             alt={country.flags?.alt}
           />
         </div>
-        <div className="w-full p-14">
-          <h1 className="text-3xl font-bold">{country.name?.common}</h1>
-          <div>
-            <ul>
+        <div className="w-full p-7">
+          <h1 className="text-3xl font-bold mb-5">{country.name?.common}</h1>
+          <div className="md:flex md:justify-between my-10">
+            <ul className="space-y-2 mb-10 md:mb-0">
               <li>
-                <span>Native Name: </span>
+                <span className="font-bold">Native Name: </span>
                 {officialName}
               </li>
               <li>
-                <span>Population: </span>
+                <span className="font-bold">Population: </span>
                 {population}
               </li>
               <li>
-                <span>Region: </span>
+                <span className="font-bold">Region: </span>
                 {country.region}
               </li>
               <li>
-                <span>Sub Region: </span>
+                <span className="font-bold">Sub Region: </span>
                 {country.subregion}
               </li>
               <li>
-                <span>Capital: </span>
+                <span className="font-bold">Capital: </span>
                 {country.capital}
               </li>
             </ul>
 
-            <ul>
+            <ul className="space-y-2">
               <li>
-                <span>Top Level Domain: </span>
+                <span className="font-bold">Top Level Domain: </span>
                 {country.tld}
               </li>
               <li>
-                <span>Currency: </span>
+                <span className="font-bold">Currency: </span>
                 {currency}
               </li>
               <li>
-                <span>Languages: </span>
+                <span className="font-bold">Languages: </span>
                 {languages}
               </li>
             </ul>
-            <div className="flex items-center flex-wrap gap-2">
-              <span>Border countries: </span>
-              {borderCountryNames.map((el: string) => (
-                <BorderCountry name={el} />
-              ))}
-            </div>
+          </div>
+          <span className="font-bold inline-block mb-2">Border countries: </span>
+          <div className="flex items-center flex-wrap gap-2">
+            {borderCountryNames.map((el: string) => (
+              <BorderCountry name={el} />
+            ))}
           </div>
         </div>
       </div>
